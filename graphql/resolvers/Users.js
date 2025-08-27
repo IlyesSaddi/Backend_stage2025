@@ -32,8 +32,8 @@ module.exports = {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'tonemail@gmail.com',   // ⚠️ remplace
-        pass: 'tonmotdepasse'         // ⚠️ remplace (ou app password Gmail)
+        user: process.env.EMAIL_USER,   // ⚠️ remplace
+        pass: process.env.EMAIL_PASS         // ⚠️ remplace (ou app password Gmail)
       }
     });
 

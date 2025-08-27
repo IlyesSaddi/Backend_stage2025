@@ -8,6 +8,7 @@ const graphqlresolver = require('./graphql/resolvers/index')
 
 const isAuth = require('./middleware/is_auth');
 const cors = require('cors');
+const User = require('./models/User');
 
 
 
@@ -37,6 +38,21 @@ app.get('/',(req,res,next) => {
     res.send("Hello World");
 })
 
+  app.get('/confirm/:token', async (req, res) => {
+  try {
+    const user = await User.findOne({ confirmationToken: req.params.token });
+    if (!user) return res.status(400).send("Invalid token");
+
+    user.isConfirmed = true;
+    user.confirmationToken = null;
+    await user.save();
+
+    res.send("✅ Account confirmed! You can now log in.");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
+});
 
 
 
@@ -49,5 +65,8 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PA
   .catch(err => {
     console.log("❌ Erreur de connexion MongoDB : ", err);
   });
+
+
+
 
 
