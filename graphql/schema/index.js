@@ -109,6 +109,8 @@ module.exports = buildSchema(`
         devicesEvolution(startDate: String!, endDate: String!): [StatsEvolution!]!
         searchDevices(query: String!): [Device!]
         searchCompanies(query: String!): [Company!]
+        
+
     }
 
     type RootMutation {
@@ -125,6 +127,7 @@ module.exports = buildSchema(`
         addCompanyToUser(userId: ID!, companyId: ID!): User!
         removeCompanyFromUser(userId: ID!, companyId: ID!): User
         updateDevice(deviceId: ID!, deviceInput: UpdateDeviceInput!): Device
+        resendConfirmationEmail(email: String!): Message
     }
 
     schema {
