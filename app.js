@@ -58,8 +58,9 @@ app.get('/',(req,res,next) => {
 
 
 
-mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.suwxstp.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority&appName=Cluster0`)
-  .then(() => {
+mongoose.connect(
+  `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.odwwmh4.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority&appName=Cluster0`
+).then(() => {
     app.listen(8000, () => console.log("✅ Server running on http://localhost:8000"));
   })
   .catch(err => {
